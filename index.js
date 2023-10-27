@@ -36,7 +36,13 @@ async function run() {
 }
 run().catch(console.dir);
 
+const serviceCollection = client.db('carShop').collection('car');
 
+app.get('/services', async(req,res)=>{
+    const cursor = serviceCollection.find();
+    const result = await cursor.toArray();
+    res.send(result);
+})
 app.get('/',(req,res)=>{
     res.send('Doctor running at browser')
 })
